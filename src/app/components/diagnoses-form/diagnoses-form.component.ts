@@ -19,6 +19,7 @@ export class DiagnosesFormComponent {
     currentDiagnoses: Array<Diagnose & { new?: boolean }> = [];
     showWarning: boolean = false;
     warningDetails!: WarningFilledOut;
+    searchError: string | null = null;
 
     constructor(
         private readonly diagnoseService: DiagnoseService,
@@ -36,11 +37,13 @@ export class DiagnosesFormComponent {
 
     searchDiagnose() {
         if (!this.selectedOption.value) return;
+        this.searchError = null;
         this.diagnoseService.searchDiagnose(this.selectedOption.value).pipe(take(1))
             .subscribe(res => {
-                console.log(res);
                 this.openAddDiagnoseModal({...res, new: true});
-            });
+            },
+                error => this.searchError = error
+            );
         this.selectedOption.setValue(null);
     }
 

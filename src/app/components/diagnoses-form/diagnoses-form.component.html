@@ -83,6 +83,7 @@
                             <span class="input-group-text cursor-pointer btn-link" (click)="searchDiagnose()">
                                 <i class="bi bi-search"></i>
                             </span>
+                            <div class="invalid-feedback" [class.d-block]="!!searchError">{{ searchError }}</div>
                         </div>
 
                     </div>
