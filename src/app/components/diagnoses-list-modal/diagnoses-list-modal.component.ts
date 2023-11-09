@@ -71,7 +71,6 @@ export class DiagnosesListModalComponent {
     }
 
     filtering() {
-        const lastDiagnosesCount = this.filteredDiagnoses.length;
         this.filteredDiagnoses = this.allDiagnoses
             .filter(diagnose => !this.nameFilter ? true
                 : diagnose.name.toLowerCase().includes(this.nameFilter?.toLowerCase()))
