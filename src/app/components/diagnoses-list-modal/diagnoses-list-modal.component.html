@@ -1,0 +1,110 @@
+<div class="modal-header">
+    <div class="pull-left float-left d-flex">
+        <div class="icon">
+            <img src="assets/diagnoses-icon.png" alt="diagnoses icon">
+        </div>
+        <span class="card-custom-title">Diagnoses from patient ESI</span>
+    </div>
+    <span class="float-right pull-right cursor-pointer" (click)="close()">
+        <i class="bi bi-x-lg"></i>
+    </span>
+</div>
+<div class="modal-body">
+    <table class="table">
+        <thead class="text-center custom-bg">
+        <tr>
+            <th class="border-end">
+                <input type="checkbox" id="selectAll" [(ngModel)]="allIsChecked" (change)="toggleSelectAll($event)">
+            </th>
+            <th class="border-end"></th>
+            <th class="border-end">Code, name</th>
+            <th class="border-end">Reg. date</th>
+            <th class="border-end">Other Reg. dates</th>
+            <th class="border-end">Active/inactive</th>
+            <th class="border-end">Status</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>
+                <div class="d-flex gap-1">
+                    <input
+                        type="text"
+                        class="filter-input form-control shadow-none"
+                        [(ngModel)]="nameFilter"
+                        (ngModelChange)="filtering()">
+                    <i class="bi bi-funnel fs-3 text-secondary"></i>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex gap-1">
+                    <input type="text"
+                           class="filter-input form-control shadow-none"
+                           bsDatepicker
+                           [(bsValue)]="regDateFilter"
+                           (bsValueChange)="filtering()"
+                           [bsConfig]="{ isAnimated: true }">
+                    <i class="bi bi-funnel fs-3 text-secondary"></i>
+                </div>
+            </th>
+            <th></th>
+            <th>
+                <div class="d-flex gap-1">
+                    <ng-multiselect-dropdown
+                        class="filter-input"
+                        [settings]="dropdownSettings"
+                        [data]="dropdownActiveFilter"
+                        [(ngModel)]="selectedActiveFilter"
+                        (ngModelChange)="filtering()"
+                    >
+                    </ng-multiselect-dropdown>
+                    <i class="bi bi-funnel fs-3 text-secondary"></i>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex gap-1">
+                    <ng-multiselect-dropdown
+                        class="filter-input"
+                        [settings]="dropdownSettings"
+                        [data]="dropdownStatusFilter"
+                        [(ngModel)]="selectedStatusFilter"
+                        (ngModelChange)="filtering()"
+                    >
+                    </ng-multiselect-dropdown>
+                    <i class="bi bi-funnel fs-3 text-secondary"></i>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of filteredDiagnoses">
+            <td>
+                <input type="checkbox" [(ngModel)]="item.selected" (ngModelChange)="checkAllIsChecked()">
+            </td>
+            <td>
+                <i
+                    class="bi bi-record-circle"
+                    [class.text-success]="item.active === 'Active'"
+                    [class.text-danger]="item.active === 'Inactive'"
+                    [class.text-warning]="item.active === 'Cancelled'"
+                ></i>
+            </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item?.registered }}</td>
+            <td>
+                <span *ngFor="let oneDate of item?.oldRegistered; let i = index">
+                    {{oneDate}}<span *ngIf="i + 1 !== item?.oldRegistered?.length">,</span>
+                </span>
+            </td>
+            <td>{{ item.active }}</td>
+            <td>{{ item.status }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="modal-footer d-flex justify-content-start m-3 border-top-0">
+    <button type="submit" class="btn btn-primary" (click)="close(true)">+ Add</button>
+    <button type="button" class="btn btn-outline-danger" (click)="close()">x Cancel</button>
+</div>
+

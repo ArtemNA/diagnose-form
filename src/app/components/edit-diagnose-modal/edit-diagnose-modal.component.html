@@ -1,0 +1,110 @@
+<div class="modal-header">
+    <div class="pull-left float-left d-flex">
+        <div class="icon">
+            <img src="assets/diagnoses-icon.png" alt="diagnoses icon">
+        </div>
+        <span class="card-custom-title">Diagnoses</span>
+    </div>
+</div>
+<div class="modal-body" [formGroup]="formGroup">
+    <div class="d-flex justify-content-between align-items-end mb-3">
+        <div class="d-flex align-items-baseline gap-3">
+            <span>Diagnose: </span> <span class="fw-bolder text-primary fs-5">{{ diagnose.name }}</span>
+        </div>
+        <div class="d-flex flex-column text-primary">
+            <div><span class="fw-bolder">Registered: </span> {{ diagnose?.registered || '-' }}</div>
+            <div><span class="fw-bolder">Renewed: </span> {{ diagnose?.renewed || '-' }}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex gap-5 align-items-start">
+            <div class="d-flex align-items-center gap-1 height-fit">
+                <div class="input-group bg-transparent-suffix calendar-input">
+                    <span class="field-required-before"></span>
+                    <input type="text"
+                           placeholder="Date"
+                           class="form-control shadow-none"
+                           bsDatepicker
+                           formControlName="fromDate"
+                           [bsConfig]="{ isAnimated: true }">
+                    <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
+                </div>
+                -
+                <div class="input-group bg-transparent-suffix calendar-input">
+                    <input type="text"
+                           placeholder="Date"
+                           class="form-control shadow-none"
+                           bsDatepicker
+                           formControlName="toDate"
+                           [bsConfig]="{ isAnimated: true }">
+                    <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
+                </div>
+            </div>
+
+            <div>
+                <div class="fw-bolder text-primary mb-2 field-required">Status</div>
+                <ng-container *ngFor="let status of statuses; let i = index">
+                    <div class="form-check">
+                        <input type="radio" id="status{{ i }}" class="form-check-input" name="status" value="{{ status }}" formControlName="status">
+                        <label for="status{{ i }}" class="form-check-label text-secondary">{{ status }}</label>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div>
+                <div class="fw-bolder text-primary mb-2 field-required">Authenticity</div>
+                <ng-container *ngFor="let authenticity of authenticates; let i = index">
+                    <div class="form-check">
+                        <input type="radio" id="authenticity{{ i }}" class="form-check-input" name="authenticity" value="{{ authenticity }}" formControlName="authenticity">
+                        <label for="authenticity{{ i }}" class="form-check-label text-secondary">{{ authenticity }}</label>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div>
+                <div class="fw-bolder text-primary mb-2">Difficulty</div>
+                <ng-container *ngFor="let difficulty of difficulties; let i = index">
+                    <div class="form-check">
+                        <input type="radio" id="difficulty{{ i }}" class="form-check-input" name="difficulty" value="{{ difficulty }}" formControlName="difficulty">
+                        <label for="difficulty{{ i }}" class="form-check-label text-secondary">{{ difficulty }}</label>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div>
+                <div class="fw-bolder text-primary mb-2 field-required">Category</div>
+                <ng-container *ngFor="let category of categories; let i = index">
+                    <div class="form-check">
+                        <input type="radio" id="category{{ i }}" class="form-check-input" name="category" value="{{ category }}" formControlName="category">
+                        <label for="category{{ i }}" class="form-check-label text-secondary">{{ category }}</label>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div>
+                <div class="fw-bolder text-primary mb-2">Type</div>
+                <ng-container *ngFor="let type of types; let i = index">
+                    <div class="form-check">
+                        <input type="radio" id="type{{ i }}" class="form-check-input" name="type" value="{{ type }}" formControlName="type">
+                        <label for="type{{ i }}" class="form-check-label text-secondary">{{ type }}</label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="d-flex align-items-center text-center mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label col-1 mb-0 fw-bolder text-primary me-3">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
+        </div>
+        <div class="d-flex align-items-center text-center mb-3">
+            <label for="exampleFormControlTextarea2" class="form-label col-1 mb-0 fw-bolder text-primary me-3">Solutions acceptance circumstances</label>
+            <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" formControlName="circumstances"></textarea>
+        </div>
+    </div>
+</div>
+<div class="modal-footer d-flex justify-content-start m-3 border-top-0">
+    <button type="submit" class="btn btn-primary" [disabled]="formGroup.invalid" (click)="close(true)">+ Add</button>
+    <button type="button" class="btn btn-outline-danger" (click)="close()">x Cancel</button>
+</div>
+

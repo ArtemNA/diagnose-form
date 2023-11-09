@@ -1,0 +1,43 @@
+.modal-body {
+    .filter-input {
+        display: block;
+        width: 180px;
+        height: 32px;
+    }
+
+    td {
+        height: 54px;
+        vertical-align: middle;
+    }
+}
+
+.custom-bg {
+    position: relative;
+    & * {
+        position: relative;
+        z-index: 2;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        inset: -14px -14px 0 -14px;
+        background: rgb(247, 247, 247);
+        z-index: 1;
+    }
+    th {
+        background-color: transparent;
+    }
+}
+
+::ng-deep .multiselect-dropdown {
+    .dropdown-btn {
+        background-color: white;
+        border-radius: 0 !important;
+        font-size: 12px;
+        height: 32px;
+
+        .dropdown-multiselect__caret {
+            display: none !important;
+        }
+    }
+}

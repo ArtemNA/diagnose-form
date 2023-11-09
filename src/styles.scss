@@ -1,1 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
+$primary: rgb(36, 73, 117);
+
+/* Importing Bootstrap SCSS file. */
+@import "node_modules/bootstrap-icons/font/bootstrap-icons.css";
+@import "node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+html,
+body {
+  font-family: Roboto, sans-serif;
+    font-size: 14px;
+}
+
+// Disable focus effects(highlight and color change for form-controls)
+.form-control:focus {
+  border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.card-custom-title {
+    color: rgb(36, 73, 117);
+    font-size: 16px;
+    line-height: 32px;
+}
+
+.bg-transparent-suffix {
+    input {
+        border-right: 0 !important;
+    }
+
+    .input-group-text {
+        background-color: transparent;
+        border-left: 0;
+        padding-left: 2px;
+    }
+}
+
+.modal-header {
+    background-color: rgb(207, 217, 232);
+    height: 42px;
+
+    .icon {
+        width: 80px;
+        border-radius: 0 4.5px 4.5px 0;
+        background-color: rgb(23, 111, 163);
+        margin: -4px 12px -5px -14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.modal-content,
+.modal-header,
+.input-group-text,
+.card,
+.card-header,
+button,
+input:not([type="radio"]),
+textarea {
+    border-radius: 0 !important;
+}
+
+.fs-7 {
+    font-size: 0.8rem;
+}
+
+.field-required:after {
+    content:"\00a0*";
+    color:red;
+    font-size: 1.25rem;
+}
+
+.field-required-before {
+    position: absolute;
+
+    &:before {
+        content:"*\00a0\00a0";
+        color:red;
+        font-size: 1.25rem;
+        margin-left: -12px;
+    }
+}
+
+.modal-body,
+.card-body {
+    padding: 2rem;
+    position: relative;
+}
